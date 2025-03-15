@@ -1,12 +1,43 @@
-@import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
+.row{
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+}
+
+.admin-main-content{
+    min-height: 100vh;
+    overflow-y: scroll;
+}
+.sidenav a,.sidenav button,.sidenav .dropdown-item{
+    color: #6c757d;
+    border-radius: 10px;
+     /* border: none; */
+}
+
+.sidenav button{
+    border: none !important;
+    padding-left: 16px !important;
+}
+.sidenav a:hover,.sidenav button:hover{
+    background-color:  black;
+    color: white;
+}
+.dropdown{
+    color: #6c757d !important;
+}
+.dropdown-menu {
+    padding-left: 6px !important;
+    border: none !important; /* Light border */ 
+}
+.modal-header,.modal-footer{
+    border: none !important;
+}
+
+
