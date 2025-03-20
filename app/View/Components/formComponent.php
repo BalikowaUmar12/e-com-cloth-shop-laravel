@@ -14,11 +14,13 @@ class formComponent extends Component
         public $action;
         public $method;
         public $buttonText;
+        public $formId;
 
-        public function __construct($action='#',$method='POST',$buttonText='Add'){
+        public function __construct($action='#',$method='POST',$buttonText='Add', $formId='form'){
             $this->action = $action;
             $this->method = strtoupper($method);
             $this->buttonText = $buttonText;
+            $this->formId = $formId;
         }
 
     /**

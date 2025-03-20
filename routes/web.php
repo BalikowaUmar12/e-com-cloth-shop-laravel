@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\adminController;
+use App\Http\Controllers\AdminController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -10,8 +10,6 @@ use App\Http\Controllers\admin\adminController;
 Route::get('/',function(){
     return view('admin.dashboard');
 })->name('dashboard');
-Route::get('/admins',function(){
-    return view('admin.admins');
-})->name('admins');
+Route::get('/admins', [AdminController::class, 'index'])->name('admins');
 
-Route::resource('admin',adminController::class);
+Route::resource('admin',AdminController::class);
