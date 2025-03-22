@@ -15,7 +15,7 @@ class adminController extends Controller
     public function index()
     {
       
-        $admins = User::all();
+        $admins = User::where('role','!=','user')->get();
         // dd($admins);
         return view('admin.admins',['admins'=>$admins]);
     }
@@ -50,8 +50,13 @@ class adminController extends Controller
             'password'=>Hash::make($validated['password']),
             'role'=>$validated['role']
         ]);
-
-        return redirect()->route('admin.index')->with('success','admin added succesfully');
+         
+        if($validated['role']=='user'){
+            return redirect()->route('signUp')->with('success','account created succesfully');
+        }else{
+            return redirect()->route('admin.index')->with('success','admin added succesfully');
+        }
+        
     }
 
     /**

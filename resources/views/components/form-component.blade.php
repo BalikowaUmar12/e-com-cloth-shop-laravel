@@ -8,6 +8,7 @@
     <button class="btn btn-primary formBtn" type="submit">
         {{$buttonText}}
     </button>
+    
 </form>
 <script>
     // document.addEventListener('DOMContentLoaded', () => {

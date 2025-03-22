@@ -68,13 +68,14 @@
             <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger adminDelete">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
       </tr>
       @endforeach
   </table>
-@vite(['resources/js/adminForm.js'])
+
+@vite(['resources/js/adminForm.js']);
 @endsection
 
 
