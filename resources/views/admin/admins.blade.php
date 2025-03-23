@@ -51,13 +51,17 @@
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            @if(Auth::user()->role =='super admin')
             <th>Action</th>
+            @endif
       </tr>
       @foreach($admins as $admin)
       <tr>
           <td>{{$admin['name']}}</td>
           <td>{{$admin['email']}}</td>
           <td>{{$admin->role}}</td>
+
+          @if(Auth::user()->role =='super admin')
           <td>
            <button class="btn btn-primary adminEditBtn"
               data-id="{{$admin->id}}"
@@ -71,11 +75,12 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
+        @endif
       </tr>
       @endforeach
   </table>
 
-@vite(['resources/js/adminForm.js']);
+@vite(['resources/js/adminForm.js'])
 @endsection
 
 

@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Register route middleware using the alias() method
+        $middleware->alias([
+            'authMiddleware' => \App\Http\Middleware\AuthMiddleware::class, // register your custom middleware
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

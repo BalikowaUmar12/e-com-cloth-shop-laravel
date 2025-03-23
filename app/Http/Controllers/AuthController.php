@@ -34,4 +34,9 @@ class AuthController extends Controller
         // Login successful
         return redirect()->route('admin.index')->with('success', 'Login successful.');
     }
+
+    public function logout(request $request){
+        Auth::logout();
+        return redirect()->route('loginForm');
+    }
 }

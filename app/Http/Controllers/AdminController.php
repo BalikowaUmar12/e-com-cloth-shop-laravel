@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
@@ -15,7 +16,9 @@ class adminController extends Controller
     public function index()
     {
       
-        $admins = User::where('role','!=','user')->get();
+        $admins = User::where('role','!=','user')
+                        ->where('id','!=',Auth::id())    
+                        ->get();
         // dd($admins);
         return view('admin.admins',['admins'=>$admins]);
     }

@@ -54,6 +54,13 @@
             </ul>
         </li>
       </ul>
+    <div class="position-absolute bottom-0 p-5">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+     
     </div>
 
     <!-- alert messages -->
