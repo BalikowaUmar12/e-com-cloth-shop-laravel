@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="dropdown-item">
+                    <a href="{{route('adminAccount')}}" class="dropdown-item">
                         <i class="bi bi-person-circle me-2"></i> Account
                     </a>
                 </li> 
