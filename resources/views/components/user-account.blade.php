@@ -2,13 +2,15 @@
     <div class="col-md-3">
         <div class="list-group">
             <a href="" class="list-group-item list-group-item-action" data-target="userProfile">Profile</a>
+            @if(Auth::user()->role == 'user')
             <a href="" class="list-group-item list-group-item-action" data-target="use">Orders</a>
+            @endif
             <a href="" class="list-group-item list-group-item-action" data-target="accountSecurity">Security</a>
         </div>
     </div>
     <div class="col-md-9" style="height:400px">
         <div id="content-area">
-
+            @include('account.profile')
         </div>
     </div>
     <script>
@@ -21,7 +23,7 @@
                     let url = this.dataset.target;
                     // console.log(url);
                     fetch(url)
-                        .then(response => response.txt())
+                        .then(response => response.text())
                         .then(data=>{
                             document.getElementById("content-area").innerHTML = data;
                         })

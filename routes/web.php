@@ -17,8 +17,8 @@ Route::middleware(['authMiddleware'])->group(function(){
     Route::resource('admin',AdminController::class);
     Route::get('admin-account', function(){ return view('admin.adminAccount');})->name('adminAccount');
 
-    Route::get('/userProfile', [accountSettings::class,'profile'])->name('userProfile');
-    Route::get('accountSecurity', [accountSettings::class,'security'])->name('accountSecurity');
+    Route::get('/userProfile', [accountSettings::class,'profile']);
+    Route::get('/accountSecurity', [accountSettings::class,'security']);
     
 });
 Route::get('/signUp',function(){ return view('auth.signUp'); })->name('signUp');
