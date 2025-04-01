@@ -17,10 +17,10 @@ class Product extends Model
         'stock',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
 
     public function cart()
     {

@@ -4,30 +4,38 @@
     </div>
     <div class="card-body">
         <div class="text-center">
-            <img src="" alt="" srcset="" class="profile-img">
-            <input type="file" class="form-control w-50 mx-auto">
+            <img src="{{asset('assets/images/profile/'. Auth::user()->photo)}}" alt="" width="100" height="100" class="m-2 rounded-circle"> 
+            <form action="{{ route('updateUserPic') }}" class="d-flex justify-content-center"  method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT') 
+                <input type="file" class="form-control w-50 mx-2" name="photo">
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </form>
         </div>
-        <form action="" class="form" method="PUT" enctype="multipart/form-data">
+        <form action="{{ route('updateUserAccount') }}" class="form" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="_method" value="PUT">
-           <div class="mt-2">
-                <label for="">Name</label>
-                <input type="text" class="form-control" value="{{Auth::user()->name}}">
-           </div>
-           <div class="mt-2">
-                <label for="">Email</label>
-                <input type="email" class="form-control" value="{{Auth::user()->email}}">
-           </div>
-           <div class="mt-3">
-                <label for="">Change Password</label>
-                <input type="password" class="form-control mb-1" placeholder="current password">
-                <input type="password" class="form-control mb-1" placeholder="new password" name="password">
-                <input type="password" class="form-control mb-1" placeholder="repeat password" name="password_confirmation">
-           </div>
-           <div class="mt-2 text-end">
+            @method('PUT') 
+            <div class="mt-2">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}">
+            </div>
+
+            <div class="mt-2">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
+            </div>
+
+            <div class="mt-3">
+                <label for="password">Change Password</label>
+                <input type="password" class="form-control mb-1" placeholder="Current password" name="oldPassword">
+                <input type="password" class="form-control mb-1" placeholder="New password" name="password">
+                <input type="password" class="form-control mb-1" placeholder="Repeat password" name="password_confirmation">
+            </div>
+
+            <div class="mt-2 text-end">
                 <button class="btn btn-primary">Save</button>
-           </div>
-            
+            </div>
         </form>
+
     </div>
 </div>

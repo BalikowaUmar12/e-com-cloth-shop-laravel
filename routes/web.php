@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\accountSettings;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\categoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -17,8 +18,12 @@ Route::middleware(['authMiddleware'])->group(function(){
     Route::resource('admin',AdminController::class);
     Route::get('admin-account', function(){ return view('admin.adminAccount');})->name('adminAccount');
 
+    Route::put('/userProfileupdate', [accountSettings::class,'updateUserAccount'])->name('updateUserAccount');
+    Route::put('/userProfilePic', [accountSettings::class,'profilePic'])->name('updateUserPic');
     Route::get('/userProfile', [accountSettings::class,'profile']);
     Route::get('/accountSecurity', [accountSettings::class,'security']);
+
+    Route::resource('category',categoryController::class);
     
 });
 Route::get('/signUp',function(){ return view('auth.signUp'); })->name('signUp');
