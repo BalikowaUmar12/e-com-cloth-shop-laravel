@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\accountSettings;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\categoryController;
+use App\Http\Controllers\productController;
+// use App\Http\Controllers\categoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -23,7 +24,7 @@ Route::middleware(['authMiddleware'])->group(function(){
     Route::get('/userProfile', [accountSettings::class,'profile']);
     Route::get('/accountSecurity', [accountSettings::class,'security']);
 
-    Route::resource('category',categoryController::class);
+    Route::resource('product',productController::class);
     
 });
 Route::get('/signUp',function(){ return view('auth.signUp'); })->name('signUp');

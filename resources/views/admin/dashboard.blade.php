@@ -15,13 +15,9 @@
                 <i class="bi bi-house-door me-2"></i> Dashboard
             </a>
         </li>
+      
         <li class="nav-item">
-            <a href="{{route('category.index')}}" class="nav-link">
-                <i class="bi bi-tags me-2"></i> Category
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{route('product.index')}}" class="nav-link">
                 <i class="bi bi-box-seam me-2"></i> Products
             </a>
         </li>
