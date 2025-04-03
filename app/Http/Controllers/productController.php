@@ -44,7 +44,7 @@ class productController extends Controller
             
             $imageName = time().".".$file->getClientOriginalExtension();
             // dd($imageName);
-            $file->move(public_path('assets/images/product'), $imageName);
+            $file->move(public_path('assets/images/products'), $imageName);
 
             $validated['image'] = $imageName;
         }
@@ -75,7 +75,32 @@ class productController extends Controller
      */
     public function update(Request $request, string $id)
     {
-      dd($id);
+      $validated = $request->validate(
+        [
+            'name' => 'required|string',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'category' =>'required|string'
+        ]
+      );
+
+      $product = Product::findOrFail($id);
+      
+      if($request->hasFile('image')){
+        $file = $request->file('image');
+        $imageName = time().".".$file->getClientOriginalExtension();
+        $file->move(public_path('assets/images/products'), $imageName);
+        $validated['image'] = $imageName;
+      }else{
+         $validated['image'] = $product->image;
+      }
+    //   dd($validated['image']);
+
+     if( $product->update($validated)){
+        return back()->with('success','product updated successfully');
+     }
     }
 
     /**
