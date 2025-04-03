@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addAdmin').addEventListener('click', function(){
       document.getElementById('adminForm').reset();
       document.getElementById('adminId').value = '';
-    //   document.getElementById('adminForm').setAttribute('action', "{{ route('admin.store') }}");
       document.querySelector('input[name="_method"]').value = 'POST';
   });
 

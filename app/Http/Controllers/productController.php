@@ -12,7 +12,9 @@ class productController extends Controller
      */
     public function index()
     {
-        return view('admin.product');
+        $products = Product::all();
+        // dd($products);
+        return view('admin.product',compact('products'));
     }
 
     /**
@@ -46,9 +48,6 @@ class productController extends Controller
 
             $validated['image'] = $imageName;
         }
-        
-        // $imageName = time().'_'.$request->file('image')->getClientOriginalName();
-        // $imagePath = $request->file('image')->storeAs('uploads', $imageName, 'public');
          
         Product::create($validated);
     
@@ -76,7 +75,7 @@ class productController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      dd($id);
     }
 
     /**
