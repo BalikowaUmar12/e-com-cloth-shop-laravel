@@ -1,4 +1,4 @@
-html, body {
+ body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -29,17 +29,32 @@ html, body {
     background-color:  black;
     color: white;
 }
-.dropdown{
+.sidenav .dropdown{
     color: #6c757d !important;
 }
-.dropdown-menu {
+.sidenav .dropdown-menu {
     padding-left: 6px !important;
     border: none !important; /* Light border */ 
 }
 .modal-header,.modal-footer{
     border: none !important;
 }
-
+.navbar a{
+    text-decoration:none;
+    color:white;
+}
+.bi-cart{
+    /* display:flex; */
+    font-size:20px;
+}
+.cart-count{
+    position: absolute;
+    top:-12px;
+    border-radius:50%;
+    font-size:12px;
+    width:20px;
+    /* right:-3px; */
+}
 /* form{
     
 } */

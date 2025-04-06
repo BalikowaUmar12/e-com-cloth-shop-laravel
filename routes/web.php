@@ -27,8 +27,9 @@ Route::middleware(['authMiddleware'])->group(function(){
     Route::resource('product',productController::class);
     
 });
+Route::get('/', function(){ return view('home');})->name('home');
 Route::get('/signUp',function(){ return view('auth.signUp'); })->name('signUp');
-Route::get('/',[AuthController::class,'index'])->name('loginForm');
+Route::get('/signIn',[AuthController::class,'index'])->name('loginForm');
 Route::post('/login',[AuthController::class,'login'])->name('loginAction');
 Route::post('/signout',[AuthController::class,'logout'])->name('logout');
 

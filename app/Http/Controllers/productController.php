@@ -98,7 +98,7 @@ class productController extends Controller
       }
     //   dd($validated['image']);
 
-     if( $product->update($validated)){
+     if($product->update($validated)){
         return back()->with('success','product updated successfully');
      }
     }
@@ -108,6 +108,9 @@ class productController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if($product->delete()){
+            return back()->with('success','deleted successfully'); 
+        }
     }
 }
