@@ -30,7 +30,7 @@
             </div>
         @endif
     </div>
-    <div class="">
+    <div class="" style="overflow-y:scroll; height:100vh">
         @yield('content')
     </div>
     <!-- @vite(['resources/js/bootstrap.js']) -->
