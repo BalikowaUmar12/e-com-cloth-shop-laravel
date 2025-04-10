@@ -49,11 +49,12 @@
 }
 .cart-count{
     position: absolute;
-    top:-12px;
+    top:-11px;
     border-radius:50%;
     font-size:12px;
     width:20px;
-    /* right:-3px; */
+    /* padding: 3px 5px; */
+    right: -6.5px;
 }
 
 @media screen and (max-width:995px) {

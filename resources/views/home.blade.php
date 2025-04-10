@@ -36,7 +36,7 @@
                  <div>
                     <a href="" class="cart-icon position-relative">
                         <i class="bi bi-cart"></i>
-                        <span class="cart-count text-white bg-danger text-center">3</span>
+                        <span class="cart-count text-white bg-danger text-center">0</span>
                         <!-- <p>cart</p> -->
                     </a>
                  </div>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" id="addToCart" data-id=1 data-name="sweater" data-price=5600>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" id="addToCart"  data-id=4 data-name="jean" data-price=200>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" id="addToCart" data-id=5 data-name="shirt" data-price=7500>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -126,12 +126,46 @@
                         </div>
                     </div>
                     <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" id="addToCart" data-id=2 data-name="pants" data-price=600>Add to cart</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+    let countElement = document.querySelector('.cart-count');
+    countElement.innerHTML = 0;
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    // console.log(localStorage);
+    let pp = JSON.parse(localStorage.getItem('products'));
+    console.log(pp);
+  
+    document.querySelectorAll("#addToCart").forEach(btn =>{
+        btn.addEventListener('click', function(){
+            let cartCount = parseInt(countElement.innerHTML);
+            countElement.innerHTML = cartCount +1;
 
+            const productId = this.getAttribute('data-id');
+            const productName = this.getAttribute('data-name');
+            const productPrice = this.getAttribute('data-price');
+            // console.log(productPrice);
+          
+
+            let product = {
+                'productId'  : productId,
+                'productName' : productName,
+                'productPrice' : productPrice
+            }
+                
+            products.push(product);
+            localStorage.setItem('products',JSON.stringify(products));
+
+            console.log(localStorage);
+        });
+    });
+   
+  });
+</script>
 @endsection
