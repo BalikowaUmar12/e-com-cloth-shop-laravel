@@ -1,0 +1,16 @@
+
+.cart-item img{
+    /* display: none; */
+    width:70px;
+    height: 70px;
+}
+
+.cart-item input[type="text"] {
+    max-width: 60px;
+    height: 35px;
+    padding: 0;
+  }
+  .cart-item button {
+    height: 35px;
+    padding: 0 10px;
+  }
