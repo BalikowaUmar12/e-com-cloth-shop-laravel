@@ -89,39 +89,5 @@
         </div>
     </div>
 </section>
-<script>
-  document.addEventListener('DOMContentLoaded',()=>{
-    let countElement = document.querySelector('.cart-count');
-    countElement.innerHTML = 0;
-    let products = JSON.parse(localStorage.getItem('products')) || [];
-    // console.log(localStorage);
-    let pp = JSON.parse(localStorage.getItem('products'));
-    console.log(pp);
-  
-    document.querySelectorAll("#addToCart").forEach(btn =>{
-        btn.addEventListener('click', function(){
-            let cartCount = parseInt(countElement.innerHTML);
-            countElement.innerHTML = cartCount +1;
-
-            const productId = this.getAttribute('data-id');
-            const productName = this.getAttribute('data-name');
-            const productPrice = this.getAttribute('data-price');
-            // console.log(productPrice);
-          
-
-            let product = {
-                'productId'  : productId,
-                'productName' : productName,
-                'productPrice' : productPrice
-            }
-                
-            products.push(product);
-            localStorage.setItem('products',JSON.stringify(products));
-
-            console.log(localStorage);
-        });
-    });
-   
-  });
-</script>
+@vite(['resources/js/addingToCart.js'])
 @endsection

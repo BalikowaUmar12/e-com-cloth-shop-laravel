@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar nav">
                 <li class="nav-item">
-                    <a href="" class="nav-link">Home</a>
+                    <a href="{{route('home')}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">Categories</a>
@@ -31,7 +31,7 @@
                     <button class="btn  btn-primary mx-1"><i class="bi bi-search"></i></button>
                 </form>
                  <div>
-                    <a href="" class="cart-icon position-relative">
+                    <a href="{{route('cart')}}" class="cart-icon position-relative">
                         <i class="bi bi-cart"></i>
                         <span class="cart-count text-white bg-danger text-center">0</span>
                         <!-- <p>cart</p> -->
