@@ -7,7 +7,7 @@
       <div class="col-md-8  col-sm-12 p-2">
           <div class="cart-header border-bottom">
               <h2> <i class="bi bi-cart fs-3" style=""></i> Your Shopping Cart</h2>
-              <p class="text-muted">3 items in your cart</p>
+              <p class="text-muted"><span id="no-item"></span> items in your cart</p>
           </div>
           <div class="cartContainer" id="cartContainer"></div>  
       </div> 
