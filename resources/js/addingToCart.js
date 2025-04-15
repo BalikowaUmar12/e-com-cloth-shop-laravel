@@ -24,10 +24,11 @@ document.addEventListener('DOMContentLoaded',()=>{
                     'productQuantity' : 1
                 }
                
-                //checking if product exits in array products and update  its quantity
+                //checking if product exits in array products and update  its quantity and price 
                 let isExisting = products.find(existingProduct => existingProduct.productId === product.productId);
                 if(isExisting){
                     isExisting.productQuantity += 1;
+                    // isExisting.productPrice = Number(isExisting.productPrice) + Number(productPrice);
                 }else{
                     products.push(product);
                 }

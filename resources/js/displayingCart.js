@@ -7,22 +7,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderCart() {
         let html = '';
-        let totalQuantity = '';
+        let totalQuantity = 0;
 
         let countElement = document.querySelector('.cart-count');
         let noItem = document.getElementById("no-item"); //number of items
+        // let totalPrice = 0;
        
 
         if (cart.length === 0) {
             html = `<p>No item in the cart</p>`;
         } else {
+            // calculating totalQuantity
+            let totalQuantity = cart.reduce((acc,item)=>{ return acc + Number(item.productQuantity)},0);
+            countElement.innerHTML = totalQuantity;
+            noItem.innerHTML = totalQuantity;
+
             cart.forEach(product => {
-                 // getting total quantity
-                let totalQuantity = cart.reduce((acc,item)=>{ return acc + Number(item.productQuantity)},0);
-                countElement.innerHTML = totalQuantity;
-                noItem.innerHTML = totalQuantity;
-
-
+                let price = Number(product.productPrice) * Number(product.productQuantity);
                 // displaying cart items
                 html += `
                 <div class="cart-item row align-items-center border-bottom py-2">
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p>Lorem ipsum dolor sit amet, consectetur.</p>
                     </div>
                     <div class="col-2">
-                        <p>${product.productPrice}</p>
+                        <p>${price}</p>
                     </div>
                     <div class="col-3 d-flex align-items-center flex-column">
                         <div class="d-flex mb-2">
@@ -91,7 +92,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderCart(); // Refresh the DOM after item removal
             });
         });
+
+            // total price for all product
+            let totalPrice = cart.reduce((acc,item)=>{ return acc + (item.productPrice * item.productQuantity)},0);
+            // console.log(totalPrice);
     }
+
+
 
     renderCart(); // Initial render of the cart when the page loads
 });

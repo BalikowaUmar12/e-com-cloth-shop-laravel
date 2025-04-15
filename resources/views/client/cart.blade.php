@@ -11,7 +11,7 @@
           </div>
           <div class="cartContainer" id="cartContainer"></div>  
       </div> 
-      <div class="col-md-4  col-sm-12 bg-success" style="height:200px">kh;ljjolj</div>
+      <div class="col-md-4  col-sm-12 bg-success" style="height:200px"></div>
     </div>
 </div>
 
