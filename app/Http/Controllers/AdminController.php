@@ -54,12 +54,7 @@ class adminController extends Controller
             'role'=>$validated['role']
         ]);
          
-        if($validated['role']=='user'){
-            return redirect()->route('signUp')->with('success','account created succesfully');
-        }else{
-            return redirect()->route('admin.index')->with('success','admin added succesfully');
-        }
-        
+        return redirect()->route('admin.index')->with('success','admin added succesfully');  
     }
 
     /**

@@ -32,6 +32,8 @@ class AuthController extends Controller
         }
     
         // Login based on role
+        // $u = $user->role;
+        // dd($u);
         if($user->role == 'user'){
             return redirect()->intended('/')->with('success', 'Login successful.');  
         }else{

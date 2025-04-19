@@ -23,6 +23,22 @@
                         </li>
                     </ul>
                 </li>
+                @if(Auth::user())
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">account</a>
+                        <ul class="dropdown-menu bg-dark" style="">
+                            <li>
+                                <a href="" class="dropdown-item">orders</a>
+                            </li>
+                            <li>
+                                <a href="" class="dropdown-item">profile</a>
+                            </li>
+                            <li>
+                                <a href="" class="dropdown-item">Kids</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
         <div class="d-flex align-items-center justify-content-sm-even leftNav" style="gap:1rem">
@@ -37,9 +53,16 @@
                         <!-- <p>cart</p> -->
                     </a>
                  </div>
+                @if(Auth::user())
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn text-white"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </form>
+                @else
                 <div class="ms-3">
                    <a href="{{route('loginForm')}}"> <i class="bi bi-person"></i> login</a>
                 </div>
+                @endif
         </div>
     </div>
 </nav>

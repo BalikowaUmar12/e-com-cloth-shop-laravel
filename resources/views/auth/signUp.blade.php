@@ -3,9 +3,8 @@
 @section('title', 'SignUp')
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="height:100vh">
-    <x-form-component :action="route('admin.store')" method="POST" buttonText="signUp" formId="signUpForm">
+    <x-form-component :action="route('createClientAccount')" method="POST" buttonText="signUp" formId="signUpForm">
         <h2 class="text-center">SignUp</h2>
-        <input type="hidden" name="role" value="user">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" name="name" id="name">
