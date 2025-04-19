@@ -16,11 +16,15 @@ document.addEventListener('DOMContentLoaded',()=>{
                 const productId = this.getAttribute('data-id');
                 const productName = this.getAttribute('data-name');
                 const productPrice = this.getAttribute('data-price');
+                const description = this.getAttribute('data-description');
+                const image = this.getAttribute('data-image');
         
                 let product = {
                     'productId'  : productId,
                     'productName' : productName,
                     'productPrice' : productPrice,
+                    'productDescription' : description,
+                    'productImage' : image,
                     'productQuantity' : 1
                 }
                

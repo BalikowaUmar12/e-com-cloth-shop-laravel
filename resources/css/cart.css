@@ -1,4 +1,6 @@
-
+.cart-details{
+  background-color: #f8f9fa;
+}
 .cart-item img{
     /* display: none; */
     width:70px;

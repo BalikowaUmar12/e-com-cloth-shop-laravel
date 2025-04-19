@@ -31,12 +31,17 @@ class AuthController extends Controller
             return redirect()->route('loginForm')->with('error', 'Incorrect password.');
         }
     
-        // Login successful
-        return redirect()->route('admin.index')->with('success', 'Login successful.');
+        // Login based on role
+        if($user->role == 'user'){
+            return redirect()->intended('/')->with('success', 'Login successful.');  
+        }else{
+            return redirect()->route('admin.index')->with('success', 'Login successful.');
+        }
+         
     }
 
     public function logout(request $request){
         Auth::logout();
-        return redirect()->route('loginForm');
+        return redirect()->route('home');
     }
 }

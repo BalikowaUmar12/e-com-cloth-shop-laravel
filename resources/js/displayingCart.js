@@ -1,18 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     let cart = JSON.parse(localStorage.getItem('products')) || [];
 
-    // getting total quantity
-    // let totalQuantity = cart.reduce((acc,item)=>{ return acc + item.productQuantity},0);
-    // console.log(totalQuantity);
+    const baseImageUrl = window.baseImageUrl; //accessing image url from laravel blade
 
     function renderCart() {
         let html = '';
-        let totalQuantity = 0;
+        // let totalQuantity = 0;
 
         let countElement = document.querySelector('.cart-count');
         let noItem = document.getElementById("no-item"); //number of items
-        // let totalPrice = 0;
-       
+
 
         if (cart.length === 0) {
             html = `<p>No item in the cart</p>`;
@@ -28,11 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 html += `
                 <div class="cart-item row align-items-center border-bottom py-2">
                     <div class="col-3">
-                        <img src="" alt="">
+                        <img src="${baseImageUrl}/${product.productImage}" alt="">
+
                     </div>
                     <div class="col-4">
                         <h5>${product.productName}</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <p>${product.productDescription}</p>
                     </div>
                     <div class="col-2">
                         <p>${price}</p>
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
         document.getElementById('cartContainer').innerHTML = html;
-        attachEventListeners(); // Re-attach event listeners after rendering
+        attachEventListeners(); // Re-attach event listeners after rendering cart
     }
 
     function attachEventListeners() {
@@ -95,10 +93,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // total price for all product
             let totalPrice = cart.reduce((acc,item)=>{ return acc + (item.productPrice * item.productQuantity)},0);
+
+            document.querySelectorAll('#totalPrice').forEach(element => {
+                element.innerHTML = totalPrice;
+            });
+            if(totalPrice == 0){
+                document.querySelector(".summary-card").style.display = "none";
+            }
             // console.log(totalPrice);
     }
 
 
 
-    renderCart(); // Initial render of the cart when the page loads
+    renderCart(); // Initial render of the cart when the page loads-> umar
 });

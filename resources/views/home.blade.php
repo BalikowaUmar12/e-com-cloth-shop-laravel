@@ -18,74 +18,25 @@
             <a href="" class="btn btn-outline-primary text-center">View all</a>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 my-2">
-                <div class="card ">
-                    <img src="" alt="" class="card-img-top">
+            @foreach($products as $product)
+            <div class="col-md-3 col-sm-6 my-2">
+                <div class="card product p-2">
+                    <img src="{{asset('assets/images/products/'.$product->image)}}" alt="" class="card-img-top">
                     <div class="card-body">
-                        <div class="card-title">Product1</div>
-                        <div class="card-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, accusamus.</div>
+                        <div class="card-title">{{$product->name}}</div>
+                        <div class="card-text text-muted">{{$product->description}}</div>
                         <div class="d-flex justify-content-between py-3 align-items-center">
-                            <span class="h5 text-primary">1000</span>
-                            <span class="text-danger"><s>3000</s></span>
-                            <span class="badge  bg-success">20% OFF</span>
+                            <span class="h5 text-primary">UGX {{number_format($product->price,0)}}</span>
+                            <span class="text-danger"><s>900</s></span>
+                            <span class="badge  bg-success">9</span>
                         </div>
                     </div>
                     <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary" id="addToCart" data-id=1 data-name="sweater" data-price=5600>Add to cart</button>
+                        <button class="btn btn-primary" id="addToCart" data-id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-description="{{$product->description}}" data-image="{{$product->image}}">Add to cart</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="card">
-                    <img src="" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <div class="card-title">Product1</div>
-                        <div class="card-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, accusamus.</div>
-                        <div class="d-flex justify-content-between py-3 align-items-center">
-                            <span class="h5 text-primary">1000</span>
-                            <span class="text-danger"><s>3000</s></span>
-                            <span class="badge  bg-success">20% OFF</span>
-                        </div>
-                    </div>
-                    <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary" id="addToCart"  data-id=4 data-name="jean" data-price=200>Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="card">
-                    <img src="" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <div class="card-title">Product1</div>
-                        <div class="card-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, accusamus.</div>
-                        <div class="d-flex justify-content-between py-3 align-items-center">
-                            <span class="h5 text-primary">1000</span>
-                            <span class="text-danger"><s>3000</s></span>
-                            <span class="badge  bg-success">20% OFF</span>
-                        </div>
-                    </div>
-                    <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary" id="addToCart" data-id=5 data-name="shirt" data-price=7500>Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="card">
-                    <img src="" alt="" class="card-img-top">
-                    <div class="card-body">
-                        <div class="card-title">Product1</div>
-                        <div class="card-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, accusamus.</div>
-                        <div class="d-flex justify-content-between py-3 align-items-center">
-                            <span class="h5 text-primary">1000</span>
-                            <span class="text-danger"><s>3000</s></span>
-                            <span class="badge  bg-success">20% OFF</span>
-                        </div>
-                    </div>
-                    <div class=" d-flex card-footer bg-white justify-content-center">
-                        <button class="btn btn-primary" id="addToCart" data-id=2 data-name="pants" data-price=600>Add to cart</button>
-                    </div>
-                </div>
-            </div>
+           @endforeach
         </div>
     </div>
 </section>

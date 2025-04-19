@@ -17,6 +17,12 @@ class productController extends Controller
         return view('admin.product',compact('products'));
     }
 
+    public function home(){
+        $products = Product::all();
+        return view('home', compact('products'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
