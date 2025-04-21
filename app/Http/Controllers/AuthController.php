@@ -34,12 +34,13 @@ class AuthController extends Controller
         // Login based on role
         // $u = $user->role;
         // dd($u);
-        if($user->role == 'user'){
-            return redirect()->intended('/')->with('success', 'Login successful.');  
-        }else{
+        $intended = session()->pull('url.intended', '/');
+
+        if ($user->role == 'user') {
+            return redirect($intended)->with('success', 'Login successful.');
+        } else {
             return redirect()->route('admin.index')->with('success', 'Login successful.');
         }
-         
     }
 
     public function logout(request $request){

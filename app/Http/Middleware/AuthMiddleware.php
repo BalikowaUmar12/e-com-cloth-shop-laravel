@@ -17,6 +17,7 @@ class authMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
+            session()->put('url.intended', url()->full());
             return redirect()->route('loginForm')->with('error','must login in');
         }
         else{

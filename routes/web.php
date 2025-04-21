@@ -15,6 +15,7 @@ Route::get('/signUp', [clientController::class,'index'])->name('signUp');
 Route::post('/accountCreate', [clientController::class,'store'])->name('createClientAccount');
 Route::get('/signIn',[AuthController::class,'index'])->name('loginForm');
 Route::post('/login',[AuthController::class,'login'])->name('loginAction');
+
 Route::post('/signout',[AuthController::class,'logout'])->name('logout');
 
 // only admin routes 
@@ -33,5 +34,7 @@ Route::middleware(['authMiddleware', 'is_admin'])->group(function(){
     
 });
 
-
+Route::middleware(['authMiddleware','is_user'])->group(function(){
+    Route::get('checkout', function(){ return view('client.checkout');})->name('checkout');
+});
 

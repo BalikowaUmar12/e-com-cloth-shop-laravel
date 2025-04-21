@@ -23,7 +23,7 @@
                         <span class="fw-1">Total</span>
                         <span id ='totalPrice'>3000</span>
                     </div> 
-                    <button class="btn btn-success">Proced to checkout</button>
+                    <a class="btn btn-success" href="{{route('checkout')}}">Proced to checkout</a>
                 </div>
             </div>
         </div>
