@@ -1,7 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
     let cart = JSON.parse(localStorage.getItem('products')) || [];
+    const csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     const baseImageUrl = window.baseImageUrl; //accessing image url from laravel blade
+    const loggedInUser =  window.loggedUser; //logged in user
+    // console.log(loggedInUser);
+    // let a =1;
+   function loadCartFromDb(){
+    if(loggedInUser){
+        fetch('/cart/products')    
+                .then(response => response.json())
+                .then(products =>{
+                    cart = products.map(item=> ({
+                        productId: item.product.id,
+                        productName: item.product.name,
+                        productDescription: item.product.description,
+                        productImage: item.product.image,
+                        productQuantity: item.quantity,
+                        productPrice: item.product.price
+                    }));
+
+                    renderCart(); // show cart from DB
+                })
+    }
+   }
+   loadCartFromDb(); //reading cart ites from db for logged in user.....->umar
+
 
     function renderCart() {
         let html = '';
@@ -55,13 +79,27 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".qtyAdd").forEach(btn => {
             btn.addEventListener('click', function () {
                 let id = this.dataset.id;
-                let item = cart.find(product => product.productId === id);
-                if (item) {
-                    item.productQuantity += 1;
-                    // item.productPrice = parse(item.productPrice + item.productPrice);
-                    localStorage.setItem('products', JSON.stringify(cart));
-                    renderCart(); // Refresh the DOM after updating the cart
+
+                if(loggedInUser){
+                    fetch(`/cart/update/${id}`,{
+                        method : 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN':csrf_token 
+                        },
+                        body: JSON.stringify({ change: 1 })
+                    })
+                    .then( () =>loadCartFromDb());
+                }else{
+                    let item = cart.find(product => product.productId === id);
+                    if (item) {
+                        item.productQuantity += 1;
+                        // item.productPrice = parse(item.productPrice + item.productPrice);
+                        localStorage.setItem('products', JSON.stringify(cart));
+                        renderCart(); // Refresh the DOM after updating the cart
+                    }
                 }
+                
             });
         });
 
@@ -69,15 +107,28 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".qtyMinus").forEach(btn => {
             btn.addEventListener('click', function () {
                 let id = this.dataset.id;
-                let item = cart.find(product => product.productId === id);
-                if (item) {
-                    item.productQuantity -= 1;
-                    if (item.productQuantity <= 0) {
-                        cart = cart.filter(p => p.productId !== id); // Remove the product if quantity is 0
+
+                if(loggedInUser){
+                    fetch(`/cart/update/${id}`,{
+                        method : 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrf_token 
+                        },
+                        body: JSON.stringify({ change: -1 })
+                    })
+                    .then(() => loadCartFromDb());
+                }else{
+                    let item = cart.find(product => product.productId === id);
+                    if (item) {
+                        item.productQuantity -= 1;
+                        if (item.productQuantity <= 0) {
+                            cart = cart.filter(p => p.productId !== id); // Remove the product if quantity is 0
+                        }
+                        localStorage.setItem('products', JSON.stringify(cart));
+                        renderCart(); // Refresh the DOM after updating the cart
                     }
-                    localStorage.setItem('products', JSON.stringify(cart));
-                    renderCart(); // Refresh the DOM after updating the cart
-                }
+                 }
             });
         });
 
@@ -85,9 +136,20 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("#removeProduct").forEach(btn => {
             btn.addEventListener('click', function() {
                 let productId = this.dataset.id;
-                cart = cart.filter(p => p.productId !== productId); // Remove item from the cart
-                localStorage.setItem('products', JSON.stringify(cart));
-                renderCart(); // Refresh the DOM after item removal
+                if(loggedInUser){
+                    fetch(`/cart/delete/${productId}`,{
+                        method : 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrf_token 
+                        }
+                    })
+                        .then(()=>loadCartFromDb());
+                }else{
+                    cart = cart.filter(p => p.productId !== productId); // Remove item from the cart
+                    localStorage.setItem('products', JSON.stringify(cart));
+                    renderCart(); // Refresh the DOM after item removal
+                }
+                
             });
         });
 

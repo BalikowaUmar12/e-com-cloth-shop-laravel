@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
+  
+    const loggedInUser =  window.loggedUser; //logged in user
+
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
     let countElement = document.querySelector('.cart-count');
@@ -27,16 +30,37 @@ document.addEventListener('DOMContentLoaded',()=>{
                     'productImage' : image,
                     'productQuantity' : 1
                 }
-               
-                //checking if product exits in array products and update  its quantity and price 
-                let isExisting = products.find(existingProduct => existingProduct.productId === product.productId);
-                if(isExisting){
-                    isExisting.productQuantity += 1;
-                    // isExisting.productPrice = Number(isExisting.productPrice) + Number(productPrice);
+            //    console.log(csrf_token);
+                // let a = 1
+                // console.log(loggedInUser);
+                if(loggedInUser){
+                    const csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    fetch('/addToCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrf_token,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(product)
+                    })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
+                    .catch(err => console.error('Error:', err));
+                    
                 }else{
-                    products.push(product);
+                      //checking if product exits in array products and update  its quantity and price 
+                    let isExisting = products.find(existingProduct => existingProduct.productId === product.productId);
+                    if(isExisting){
+                        isExisting.productQuantity += 1;
+                        // isExisting.productPrice = Number(isExisting.productPrice) + Number(productPrice);
+                    }else{
+                        products.push(product);
+                    }
+                    localStorage.setItem('products',JSON.stringify(products));
                 }
-                localStorage.setItem('products',JSON.stringify(products));
+              
     
                 displayCount() //display count after adding item... 
             });

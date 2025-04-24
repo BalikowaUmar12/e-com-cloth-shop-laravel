@@ -31,6 +31,7 @@
 </div>
 <script>
     window.baseImageUrl = "{{ asset('assets/images/products') }}"; //setting image url to be globally accessed by js using vite
+    window.loggedUser = "{{Auth::user()}}"; //accessing logged in user
 </script>
 
 @vite(['resources/js/displayingCart.js'])

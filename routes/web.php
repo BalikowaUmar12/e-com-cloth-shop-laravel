@@ -2,6 +2,7 @@
 // use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\accountSettings;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\clientController;
@@ -36,5 +37,10 @@ Route::middleware(['authMiddleware', 'is_admin'])->group(function(){
 
 Route::middleware(['authMiddleware','is_user'])->group(function(){
     Route::get('checkout', function(){ return view('client.checkout');})->name('checkout');
+    Route::post('/addToCart',[cartController::class,'addToCart'])->name('addToCart');
+    Route::get('/cart/products',[cartController::class,'getProducts']);
+    Route::put('/cart/update/{productId}',[cartController::class,'updateProduct']);
+    Route::delete('/cart/delete/{productId}',[cartController::class,'deleteProduct']);
 });
+
 

@@ -40,5 +40,8 @@
         </div>
     </div>
 </section>
+<script>
+    window.loggedUser = "{{Auth::user()}}";
+</script>
 @vite(['resources/js/addingToCart.js'])
 @endsection
