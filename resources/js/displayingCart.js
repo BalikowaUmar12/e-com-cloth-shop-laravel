@@ -124,11 +124,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         item.productQuantity -= 1;
                         if (item.productQuantity <= 0) {
                             cart = cart.filter(p => p.productId !== id); // Remove the product if quantity is 0
+                            // window.location.reload();
                         }
                         localStorage.setItem('products', JSON.stringify(cart));
                         renderCart(); // Refresh the DOM after updating the cart
                     }
                  }
+                
             });
         });
 
@@ -149,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     localStorage.setItem('products', JSON.stringify(cart));
                     renderCart(); // Refresh the DOM after item removal
                 }
-                
+                window.location.reload();
             });
         });
 

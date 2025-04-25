@@ -41,6 +41,7 @@ Route::middleware(['authMiddleware','is_user'])->group(function(){
     Route::get('/cart/products',[cartController::class,'getProducts']);
     Route::put('/cart/update/{productId}',[cartController::class,'updateProduct']);
     Route::delete('/cart/delete/{productId}',[cartController::class,'deleteProduct']);
+    Route::post('/cart/syn/',[cartController::class,'cartSyn']);
 });
 
 

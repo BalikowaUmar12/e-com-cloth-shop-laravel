@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class cartController extends Controller
@@ -70,4 +71,32 @@ public function updateProduct(Request $request, $productId){
           $product->delete();
         }
     }
+
+  public function cartSyn(Request $request){
+     $products = $request->all();
+     if($products == 0){
+      return response()->json('no item in cart');
+     }else{
+        foreach($products as $product){
+          $exisitingProduct = Cart::where('user_id',Auth::id())
+                                    ->where('product_id', $product['productId'])
+                                    ->first();
+          if($exisitingProduct){
+            $exisitingProduct->quantity += $product['productQuantity'];
+            $exisitingProduct->save();
+          }else{
+              Cart::create([
+                'user_id' =>  Auth::id(),
+                'quantity' =>$product['productQuantity'],
+                'product_id'=>$product['productId'],
+                'price'=>$product['productPrice']
+            ]);
+          }
+          
+        }
+
+      return response()->json(' cart sycronoised successfully');
+     }
+      
+  }
 }

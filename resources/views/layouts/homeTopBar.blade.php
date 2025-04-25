@@ -49,7 +49,7 @@
                  <div>
                     <a href="{{route('cart')}}" class="cart-icon position-relative">
                         <i class="bi bi-cart"></i>
-                        <span class="cart-count text-white bg-danger text-center">0</span>
+                        <span class="cart-count text-white bg-danger text-center"></span>
                         <!-- <p>cart</p> -->
                     </a>
                  </div>

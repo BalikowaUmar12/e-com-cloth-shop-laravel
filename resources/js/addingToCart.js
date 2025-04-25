@@ -12,6 +12,44 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     displayCount()
 
+function loadCartFromDb(){
+    if(loggedInUser){
+        fetch('/cart/products')
+            .then(response => response.json())
+            .then(cart => {
+                products = cart.map(item=>({
+                        productId: item.product.id,
+                        productName: item.product.name,
+                        productDescription: item.product.description,
+                        productImage: item.product.image,
+                        productQuantity: item.quantity,
+                        productPrice: item.product.price   
+                }))
+                console.log(products);
+                displayCount()
+            });       
+    }
+}
+loadCartFromDb()
+// console.log(products);
+    if(loggedInUser && products.length > 0){
+        fetch('/cart/syn',{
+            method : 'POST',
+            headers : {
+               'Content-Type' : 'application/json',
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content'), 
+                'X-Requested-With': 'XMLHttpRequest'                
+            },
+            body : JSON.stringify(products)
+        })
+        .then(response => response.json())
+        .then(() =>{ localStorage.removeItem('products');});
+
+        loadCartFromDb()
+    }
+
+  
+
     function addToCart(){
         document.querySelectorAll("#addToCart").forEach(btn =>{
             btn.addEventListener('click', function(){
@@ -48,6 +86,8 @@ document.addEventListener('DOMContentLoaded',()=>{
                     .then(res => res.json())
                     .then(data => console.log(data))
                     .catch(err => console.error('Error:', err));
+
+                    loadCartFromDb()
                     
                 }else{
                       //checking if product exits in array products and update  its quantity and price 
