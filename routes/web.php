@@ -2,11 +2,14 @@
 // use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\api/AuthController;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\accountSettings;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\productController;
+
+// use App\Http\Controllers\api\AuthController as ApiAuthController;
 
 
 // public routes
@@ -44,4 +47,16 @@ Route::middleware(['authMiddleware','is_user'])->group(function(){
     Route::post('/cart/syn/',[cartController::class,'cartSyn']);
 });
 
+
+
+// Inside web.php
+// Route::middleware('api')
+//     ->prefix('api')
+//     ->group(function () {
+//         Route::post('/register', [ApiAuthController::class, 'register']);
+//         Route::post('/login', [ApiAuthController::class, 'login']);
+//         Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//             return $request->user();
+//         });
+//     });
 
